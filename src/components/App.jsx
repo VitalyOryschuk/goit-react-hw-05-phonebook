@@ -1,36 +1,27 @@
 import React, { Component } from 'react';
-import shortid from 'shortid';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import shortid from 'shortid';
+// helpers
+import * as CONTACT from '../helpers';
+// components
 import SearchForm from './SearchForm/SearchForm';
 import ContactsList from './ContactsList/ContactsList';
 import Notify from './Notify/Notify';
 import Filter from './Filter/Filter';
-import styles from './style.module.css';
+// transition
 import '../transition/fade.css';
 import '../transition/slide.css';
 import message from '../transition/message.module.css';
 import pop from '../transition/pop.module.css';
-
-const filterContacts = (contacts, filter) => {
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase()),
-  );
-};
-
-const findContact = (contacts, contact) =>
-  contacts.find(item => item.name.toLowerCase() === contact.name.toLowerCase());
+// css
+import styles from './style.module.css';
 
 export default class App extends Component {
   state = {
-    contacts: [
-      // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      // { id: 'id-2', name: 'Hermion Kline', number: '443-89-12' },
-      // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
     isShowNotify: false,
-    info: '',
+    messageNotify: '',
   };
 
   componentDidMount() {
@@ -49,7 +40,7 @@ export default class App extends Component {
   }
 
   handleSignUp = contact => {
-    const contactFind = findContact(this.state.contacts, contact);
+    const contactFind = CONTACT.findContact(this.state.contacts, contact);
     const contactToAdd = {
       ...contact,
       id: shortid.generate(),
@@ -57,7 +48,7 @@ export default class App extends Component {
 
     if (contactFind) {
       this.setState({
-        info: `${contactFind.name} is already in contacts!`,
+        messageNotify: `${contactFind.name} is already in contacts!`,
         isShowNotify: true,
       });
       this.hideNotify();
@@ -67,7 +58,7 @@ export default class App extends Component {
         isShowNotify: false,
       }));
     } else {
-      this.setState({ info: `Input name please!`, isShowNotify: true });
+      this.setState({ messageNotify: `Input name please!`, isShowNotify: true });
       this.hideNotify();
     }
   };
@@ -83,14 +74,15 @@ export default class App extends Component {
   };
 
   deleteContact = id => {
+    const filtered = this.state.contacts.filter(contact => contact.id !== id);
     this.setState(state => ({
-      contacts: state.contacts.filter(contact => contact.id !== id),
+      contacts: filtered,
     }));
   };
 
   render() {
-    const { contacts, filter, info, isShowNotify } = this.state;
-    const filteredContacts = filterContacts(contacts, filter);
+    const { contacts, filter, messageNotify, isShowNotify } = this.state;
+    const filteredContacts = CONTACT.filterContacts(contacts, filter);
     return (
       <CSSTransition in timeout={1000} classNames="fade" appear>
         <div className={styles.container}>
@@ -104,7 +96,7 @@ export default class App extends Component {
                 classNames={message}
                 unmountOnExit
               >
-                <Notify message={info} />
+                <Notify message={messageNotify} />
               </CSSTransition>
             )}
           </TransitionGroup>

@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
-// import { CSSTransition } from 'react-transition-group';
 import styles from './SearchForm.module.css';
 
-export default class SearchForm extends Component {
-  // static defaultProps = {
-  //   onChangeSubmit: function,
-  // };
+const INIT_STATE = { name: '', number: '' };
 
-  state = {
-    name: '',
-    number: '',
-  };
+export default class SearchForm extends Component {
+  state = { ...INIT_STATE };
 
   nameInputId = shortid.generate();
 
@@ -29,8 +23,7 @@ export default class SearchForm extends Component {
 
   reset = () => {
     this.setState({
-      name: '',
-      number: '',
+      ...INIT_STATE,
     });
   };
 
