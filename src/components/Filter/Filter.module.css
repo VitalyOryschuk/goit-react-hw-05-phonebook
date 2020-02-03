@@ -1,0 +1,14 @@
+.input {
+  border-radius: 5px;
+  outline: none;
+  display: block;
+  margin: 0 auto;
+}
+
+.FilterForm {
+  margin-bottom: 20px;
+}
+
+.FilterForm > label {
+  color: goldenrod;
+}

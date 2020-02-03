@@ -1,0 +1,33 @@
+.contactList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ContactsListItem {
+  padding: 5px;
+}
+
+.button {
+  margin-left: 40px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  padding: 0;
+  width: 60px;
+  cursor: pointer;
+  background: gray;
+  color: rgb(7, 7, 7);
+  font-weight: 600;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container > span {
+  margin-left: 15px;
+  color: gray;
+}

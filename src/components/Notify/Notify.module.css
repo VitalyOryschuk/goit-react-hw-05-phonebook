@@ -1,0 +1,11 @@
+.title {
+  margin: 0 auto;
+  padding: 5px;
+  width: 50%;
+  background: rgb(238, 138, 138);
+  text-transform: uppercase;
+  color: purple;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 400;
+}

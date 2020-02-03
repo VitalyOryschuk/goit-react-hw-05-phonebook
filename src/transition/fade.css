@@ -1,0 +1,10 @@
+.fade-appear {
+  transform: scale(0);
+
+}
+
+.fade-appear-active {
+  transform: scale(1);
+  transition: transform 1000ms;
+
+}

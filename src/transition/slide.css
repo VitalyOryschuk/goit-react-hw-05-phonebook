@@ -1,0 +1,10 @@
+.slide-appear {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.slide-appear-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 2000ms cubic-bezier(1, 0, 1, 1), transform 2000ms ease-in-out;
+}
